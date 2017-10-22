@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171022121116) do
+ActiveRecord::Schema.define(version: 20171022133924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20171022121116) do
     t.datetime "updated_at", null: false
     t.index ["santa_id"], name: "index_participants_on_santa_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "rules", force: :cascade do |t|
+    t.bigint "santa_id"
+    t.bigint "giver_id"
+    t.bigint "receiver_id"
+    t.string "rule"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_rules_on_giver_id"
+    t.index ["receiver_id"], name: "index_rules_on_receiver_id"
+    t.index ["santa_id"], name: "index_rules_on_santa_id"
   end
 
   create_table "santas", force: :cascade do |t|
@@ -64,4 +76,7 @@ ActiveRecord::Schema.define(version: 20171022121116) do
   add_foreign_key "pairings", "users", column: "receiver_id"
   add_foreign_key "participants", "santas"
   add_foreign_key "participants", "users"
+  add_foreign_key "rules", "santas"
+  add_foreign_key "rules", "users", column: "giver_id"
+  add_foreign_key "rules", "users", column: "receiver_id"
 end
