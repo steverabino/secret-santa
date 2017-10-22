@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  giver: one
+  receiver: two
+  santa: one
+  status: MyString
+
+two:
+  giver: three
+  receiver: four
+  santa: two
+  status: MyString
